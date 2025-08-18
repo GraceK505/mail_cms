@@ -1,0 +1,12 @@
+<!-- View Container -->
+<div class="main_search_content" *ngIf="fullTags.length > 0">
+  <div class="view-container">
+    <app-search-templates
+      class="search_card"
+      *ngFor="let tag of fullTags"
+      [tag]="tag"
+      [hide]="hideBtn"
+      (flushFilter)="resetTags()"
+    ></app-search-templates>
+  </div>
+</div>

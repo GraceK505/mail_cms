@@ -1,0 +1,24 @@
+.cnt {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.cnt-nav {
+  padding: 10px;
+  background-color: #020420;
+  color: #ef6974;
+}
+.cnt-body {
+  flex-grow: 1;
+}
+.editor,
+.editor-container {
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  position: relative;
+}
+
+.contextBox {
+  z-index: 0 !important;
+}

@@ -1,0 +1,74 @@
+<div class="main_search_content">
+	<input #inputText
+		(input)="onInputSearch(inputText.value)"
+		type="text"
+		class="search_bar"
+		placeholder="search for the template">
+	<div class="view-container">
+		<app-suspense-component-custom [observable]="tags$">
+			<div #email_cards
+				*ngFor="let item of tags$ | async"
+				(mouseenter)="setHoverState(item.id, 'show')"
+				(mouseleave)="setHoverState(item.id, 'hide')"
+				class="main_card"
+				detail>
+				<div class="suspense_opacity">
+					<div class="container_card">
+						<img [src]="item.image"
+							[alt]="item.id">
+						<div class="title_card">
+							<h2>{{ item.name }}</h2>
+						</div>
+						<div class="subtitle_box">
+							<span *ngFor="let subtitle of item.subtitle">
+								<p class="refs">{{ subtitle }}</p>
+							</span>
+						</div>
+					</div>
+					<div class="navigation_card">
+						<div (click)="navigateTo(item.id)"
+							class="btn_navigation">
+							<span>Natigate to editor</span>
+							<mat-icon fontIcon="arrow_forward"></mat-icon>
+						</div>
+					</div>
+					<div [@hoverBox]="hoverState[item.id]"
+						class="shadow_animate"></div>
+				</div>
+			</div>
+			<div *ngFor="let list of fakeLength"
+				class="main_card"
+				loading>
+				<div class="isLoading">
+					<svg xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 100 100"
+						preserveAspectRatio="xMidYMid"
+						width="50"
+						height="50"
+						style="shape-rendering: auto; display: block; background: #00000000"
+						xmlns:xlink="http://www.w3.org/1999/xlink">
+						<g>
+							<circle stroke-linecap="round"
+								fill="none"
+								stroke-dasharray="50.26548245743669 50.26548245743669"
+								stroke="#fe718d"
+								stroke-width="8"
+								r="32"
+								cy="50"
+								cx="50">
+								<animateTransform values="0 50 50;360 50 50"
+									keyTimes="0;1"
+									dur="1s"
+									repeatCount="indefinite"
+									type="rotate"
+									attributeName="transform">
+								</animateTransform>
+							</circle>
+							<g></g>
+						</g>
+					</svg>
+				</div>
+			</div>
+		</app-suspense-component-custom>
+	</div>
+</div>

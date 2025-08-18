@@ -1,0 +1,171 @@
+.containerLightBox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #30302f84;
+  z-index: 10;
+}
+
+.search_text h3 span {
+  font-size: 20px;
+  color: #999;
+  font-weight: 300;
+  padding: 10px;
+  transition: opacity ease-in-out 0.5s;
+}
+
+.lightbox {
+  width: 100%;
+  max-width: 40%;
+  height: auto;
+  background-color: #f7ede0de;
+  backdrop-filter: blur(30px);
+  position: relative;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: grid;
+  overflow: hidden;
+  outline: none;
+  flex-direction: column;
+  grid-template-rows: 1fr auto auto;
+  z-index: 20;
+  border-radius: 10px;
+}
+
+.lightbox input {
+  width: 100%;
+  height: auto;
+  border: none;
+  border-bottom: 1px solid #ee6002;
+  padding: 0.75em 0.5em;
+  font-size: 1.2rem;
+  outline: none;
+  box-sizing: border-box;
+  background: transparent;
+  position: relative;
+  margin-bottom: 20px;
+  grid-row: 1;
+}
+
+.btn_close_qeuries {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  transition: opacity ease-in-out 0.2s;
+}
+
+.btn_close,
+.font_icon_close {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: opacity ease-in-out 0.2s;
+  top: 30px;
+  right: 20px;
+}
+
+.btn_close:hover {
+  opacity: 0.5;
+}
+
+div.btn_close:before,
+span.btn_close_qeuries:before {
+  content: "";
+  width: 1px;
+  height: 15px;
+  display: inline-block;
+  transform: rotate(45deg);
+}
+
+div.btn_close:after,
+span.btn_close_qeuries:after {
+  content: "";
+  width: 1px;
+  height: 15px;
+  display: inline-block;
+  transform: rotate(-45deg);
+}
+
+.btn_close_qeuries:before,
+.btn_close_qeuries:after {
+  background-color: #000;
+  position: relative;
+}
+
+div.btn_close:before,
+div.btn_close:after {
+  background-color: blueviolet;
+  position: absolute;
+}
+
+.references {
+  display: block;
+  /* flex-wrap: wrap; */
+  gap: 10px;
+  grid-row: 2;
+  width: 95%;
+  margin: auto;
+}
+
+.ref_container {
+  padding: 10px;
+  border: 1px solid #ee6002;
+  color: #343434;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #eadddd;
+  display: none;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  float: left;
+  margin: 5px;
+}
+
+.view-container {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  overflow-y: scroll;
+  z-index: 1;
+}
+
+.placeholder {
+  margin: 0 auto;
+  max-width: 100%;
+  min-height: 20px;
+  background-color: #eee;
+  border-radius: 15px;
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: darkgray;
+  background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  height: 20px;
+  position: relative;
+}

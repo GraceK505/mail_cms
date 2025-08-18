@@ -1,0 +1,13 @@
+<!-- <div #templatesEditor class="templates_editor"></div> -->
+
+<app-suspense-component-custom [observable]="data$">
+    <!-- <div #templatesEditor class="templates_editor" detail></div> -->
+	<div class="templates_editor" 
+		detail>
+		<app-editor-main [optionsTemplate]="data$"></app-editor-main>
+		<!-- <div class="block_navigateTo">
+			<app-generic-button [callFunction]="navigateTo.bind(this, currentTemplateID)"></app-generic-button>
+		</div> -->
+	</div>
+	<div class="templates_editor" loading>loading ...</div>
+</app-suspense-component-custom>

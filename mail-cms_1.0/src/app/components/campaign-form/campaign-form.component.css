@@ -1,0 +1,102 @@
+.view_container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    position: relative;
+    z-index: 1;
+    justify-content: flex-start;
+    grid-template-columns: 0.1fr 0.5fr 0.5fr 0.1fr;
+    grid-template-rows: 0.1fr 1fr 0.5fr 0.1fr;
+    column-gap: 2%;
+}
+
+.email-input {
+    min-height: 100px;
+    outline: none;
+    white-space: pre-wrap;
+}
+
+.email-bubble {
+    background-color: #faece0;
+    border: 1px solid #00acc1;
+    border-radius: 12px;
+    padding: 2px 6px;
+    margin: 2px;
+    display: inline-block;
+    color: #007c91;
+    font-weight: bold;
+    position: relative;
+}
+
+.form_container_grid {
+    width: 40vw;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 1px #ee6002;
+    padding: 15px;
+}
+
+
+input,
+textarea,
+.email-container {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    width: 100%;
+    height: auto;
+    border: none;
+    border-bottom: 1px solid #ee6002;
+    padding: 0.75em 0.5em;
+    font-size: 1.2rem;
+    outline: none;
+    box-sizing: border-box;
+    background: transparent;
+    position: relative;
+    margin: 20px 0px;
+    grid-row: 1;
+    overflow-y: hidden;
+}
+
+.htmlEditor {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.description {
+    grid-column-start: 3;
+    grid-row-start: 2;
+    line-height: 1.5em;
+    width: 40vw;
+    display: flex;
+    overflow-y: hidden;
+}
+
+iframe {
+    flex-grow: 1;
+    border-radius: 15px;
+    resize: horizontal;
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.cm-line {
+    display: inline-block !important;
+}
+
+.submit{
+    grid-column-start: 2;
+    grid-row-start: 3;
+    border: 1px solid #ee6002;
+    border-radius: 15px;
+    padding: 10px;
+    height: 20px;
+    width: 130px;
+    cursor: pointer;
+}

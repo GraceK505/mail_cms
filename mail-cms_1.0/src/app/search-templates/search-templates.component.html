@@ -1,0 +1,28 @@
+<div class="search_container">
+  <div class="slot_container">
+    <figure>
+      <div class="image_container">
+        <img [src]="tag && tag.image" [alt]="tag.title" />
+      </div>
+      <div class="info_container" [style.background-color]="tag.color">
+        <h1>{{ tag.name }}</h1>
+        <p>{{ tag.title }}</p>
+        <div class="references">
+          <div class="ref_container" *ngFor="let item of tag.subtitle">
+            <span>{{ tag.subtitle }}</span>
+          </div>
+        </div>
+      </div>
+    </figure>
+    <div class="btn_container">
+      <div (click)="reset()" [@hide]="hide" (@hide.done)="handleAnimationEnd()" [style.display]="shouldHide ? 'none' : 'flex'" class="card_button">
+        <span>unfilter</span>
+        <mat-icon fontIcon="arrow_forward"></mat-icon>
+      </div>
+      <div (click)="navigateTo(tag.id)" class="card_button">
+        <span>Navigate to the editor</span>
+        <mat-icon fontIcon="arrow_forward"></mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

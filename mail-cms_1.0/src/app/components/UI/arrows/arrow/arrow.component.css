@@ -1,0 +1,32 @@
+[data-theme="light"] {
+  --background-color: #fff2df;
+  --ul-background: #f7debe;
+  --context-box: #feebd3de;
+  --icon-color: #343434;
+}
+
+[data-theme="dark"] {
+  --background-color: #222831;
+  --ul-background: #393e46;
+  --context-box: #7077a1;
+  --icon-color: #fff2df;
+}
+
+svg path{
+  stroke: var(--icon-color)
+}
+
+.stroke-dasharray {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 0;
+  animation: drawStrokeEven 3s ease-in-out forwards infinite;
+}
+
+@keyframes drawStrokeEven {
+  from {
+    stroke-dashoffset: 200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}

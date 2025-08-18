@@ -1,0 +1,105 @@
+<main [attr.data-theme]="theme$">
+  <div class="sided_bar">
+    <div class="sided_bar_navigation">
+      <ul>
+        <li *ngFor="let item of menuItems$ | async">
+          <div class="button" (click)="toggle($event, item)">
+            <ng-container
+              *ngIf="item.field === 'home'"
+              [style.display]="animeState() ? 'none' : 'flex'"
+            >
+              <app-logo></app-logo>
+              <span>{{ item.name }}</span>
+            </ng-container>
+            <ng-container
+              *ngIf="
+                item.field !== 'home' &&
+                item.field !== 'dark_mode' &&
+                item.field !== 'tag' &&
+                item.field !== 'settings'
+              "
+              [style.opacity]="animeState() ? 'flex' : 'none'"
+            >
+              <mat-icon
+                aria-hidden="false"
+                aria-label="Example home icon"
+                [fontIcon]="item.field"
+              ></mat-icon>
+              <span>{{ item.name }}</span>
+            </ng-container>
+          </div>
+          <div
+            class="button"
+            *ngIf="item.field === 'dark_mode'"
+            (click)="themeChanging()"
+          >
+            <ng-container>
+              <mat-icon aria-hidden="false" [fontIcon]="item.field"></mat-icon>
+            </ng-container>
+            <span>{{ item.name }}</span>
+          </div>
+          <div
+            class="button"
+            *ngIf="item.field === 'tag'"
+            (click)="openSocial()"
+          >
+            <ng-container>
+              <mat-icon aria-hidden="false" [fontIcon]="item.field"></mat-icon>
+            </ng-container>
+            <span>{{ item.name }}</span>
+          </div>
+          <div
+            class="button"
+            *ngIf="item.field === 'settings'"
+            appShowIconOnRoute
+            (click)="handleBoxState(item)"
+          >
+            <ng-container>
+              <mat-icon aria-hidden="false" [fontIcon]="item.field"></mat-icon>
+            </ng-container>
+            <span>{{ item.name }}</span>
+          </div>
+        </li>
+      </ul>
+      <div
+        [@toggleBox]="boxState"
+        class="contextBox"
+      >
+        <ul *ngIf="panelItem">
+          <li *ngFor="let subItem of panelItem.subMenu" class="sub_fields">
+            <span>
+              {{subItem.name}}
+            </span>
+            <div *ngFor="let panel of subItem.panelIcons" class="fields_data" (click)="navigationContext()">
+              <ng-container>
+                <mat-icon
+                  aria-hidden="false"
+                  [fontIcon]="panel.icon"
+                ></mat-icon>
+              </ng-container>
+              <a [@sub_menu_fade]="subMenuState" >
+                {{ panel.iconText }}
+              </a>
+            </div>
+          </li>
+        </ul>
+        <div class="font_icon_close" (click)="close()">
+          <mat-icon fontIcon="arrow_back"></mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content_space" id="anchor">
+    <router-outlet></router-outlet>
+    <ng-container class="search_slot-container" *ngIf="showLightbox">
+      <app-search-slot
+        [showLightbox]="showLightbox"
+        (closeLightboxEvent)="showLightbox = false"
+      ></app-search-slot>
+    </ng-container>
+    <ng-container *ngIf="showSocial">
+      <app-social [showSocial]="showSocial"></app-social>
+    </ng-container>
+    <app-footer></app-footer>
+  </div>
+</main>

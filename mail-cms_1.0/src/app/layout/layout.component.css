@@ -1,0 +1,238 @@
+::view-transition-old(page-content-header) {
+  animation: 0.5s ease-in-out;
+}
+
+::view-transition-new(page-content-body) {
+  animation: 0.5s ease-in-out;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+[data-theme="light"] {
+  --background-color: #fff2df;
+  --ul-background: #f7debe;
+  --context-box: #feebd3de;
+  --icon-color: #343434;
+}
+
+[data-theme="dark"] {
+  --background-color: #222831;
+  --ul-background: #393e46;
+  --context-box: #7077a1;
+  --icon-color: #fff2df;
+}
+
+body {
+  background-color: var(--background-color);
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.container_other {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+}
+
+.logo_text {
+  color: var(--icon-color);
+}
+
+#content_0 {
+  opacity: 0;
+  view-transition-name: home-svg;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.search_slot-container {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  overflow-y: hidden;
+  z-index: 1;
+}
+
+main {
+  height: max-content;
+  padding: 0px;
+  display: grid;
+  background-color: var(--background-color);
+  grid-template-columns: 100px 1fr;
+  min-height: 100%;
+}
+
+.sided_bar {
+  display: grid;
+  grid-column-start: 1;
+  grid-template-columns: 25% 1fr;
+}
+
+.sided_bar_navigation {
+  grid-column-start: 1;
+  height: 100%;
+  position: fixed;
+  z-index: 15;
+  display: grid;
+  grid-template-columns: 100px 1fr;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  justify-content: flex-start;
+  gap: 30px;
+  padding: 20px;
+  width: 60%;
+  position: relative;
+  grid-column-start: 1;
+  background-color: var(--ul-background);
+  border-right: 1px solid #999;
+}
+
+ul li {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+ul li .button {
+  color: var(--icon-color);
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  cursor: pointer;
+  transition: opacity ease-in 0.2s;
+}
+
+ul li .button:hover {
+  opacity: 0.5;
+}
+
+.btn_template_params {
+  display: none;
+}
+
+.content_space {
+  width: 100%;
+  position: relative;
+  height: 100%;
+  grid-column-start: 2;
+}
+
+.contextBox {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  /* background-color: #feebd3de; */
+  background-color: var(--context-box);
+  grid-column-start: 2;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  border-right: 1px solid #999;
+}
+
+.contextBox ul {
+  background-color: transparent;
+  width: auto;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.email_template {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.email_template img {
+  width: 100%;
+  position: relative;
+  transform: translateY(100%);
+}
+
+.contextBox ul li.sub_fields {
+  color: var(--icon-color);
+  height: 100%;
+}
+
+.contextBox ul li.sub_fields a,
+.contextBox ul li.sub_fields span {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--icon-color);
+}
+
+.contextBox ul li.sub_fields span {
+  font-size: 40px;
+  font-weight: 600;
+  margin-block-end: 30px;
+}
+
+.btn_close,
+.font_icon_close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: opacity ease-in-out 0.2s;
+  color: var(--icon-color);
+}
+
+.btn_close:hover {
+  opacity: 0.5;
+}
+
+.btn_close:before {
+  content: "";
+  width: 1px;
+  height: 15px;
+  position: absolute;
+  transform: rotate(45deg);
+  background-color: #fff;
+}
+
+.btn_close:after {
+  content: "";
+  width: 1px;
+  height: 15px;
+  position: absolute;
+  transform: rotate(-45deg);
+  background-color: #fff;
+}
+
+.home_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fields_data {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  padding-bottom: 20px;
+}

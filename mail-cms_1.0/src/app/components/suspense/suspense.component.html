@@ -1,0 +1,7 @@
+<ng-container *ngIf="observeState.length > 0; else loadingTemplate">
+  <ng-content select="[detail]"></ng-content>
+</ng-container>
+
+<ng-template #loadingTemplate>
+  <ng-content select="[loading]"></ng-content>
+</ng-template>

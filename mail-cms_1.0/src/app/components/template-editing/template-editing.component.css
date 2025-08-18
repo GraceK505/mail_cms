@@ -1,0 +1,6 @@
+.templates_editor {
+  display: block;
+  width: 100%;
+  height: 100%;
+  --ul-background: #f7debe;
+}

@@ -1,0 +1,21 @@
+<div class="view_container">
+  <div class="form_container_grid">
+    <input placeholder="from:" #adminName type="text" name="name"/>
+    <div class="email-container">
+      <div
+        #editable
+        class="email-input"
+        contenteditable="true"
+        (input)="handleInput($event)"
+      ></div>
+    </div>
+    <input placeholder="Subject:" #subject type="text" name="Subject"/>
+    <div #parentElmnt class="htmlEditor"></div>
+  </div>
+  <div class="description">
+    <iframe [frameBorder]="0" #iframeElement></iframe>
+  </div>
+  <!-- <div class="submit" (click)="submit()">
+    submit your email
+  </div> -->
+</div>

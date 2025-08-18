@@ -1,0 +1,17 @@
+<div class="cnt">
+  <div class="cnt-body" style="height: 100vh">
+    <div #tools_Panel class="tools_panels">
+      <div *ngFor="let menuValue of menuPanelIcon">
+        <ng-container>
+          <div class="btns_runCommmands">
+            <mat-icon aria-hidden="false" [fontIcon]="menuValue.icon">
+            </mat-icon>
+            <span>
+              {{ menuValue.iconText }}
+            </span>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

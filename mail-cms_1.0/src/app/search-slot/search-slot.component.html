@@ -1,0 +1,53 @@
+<div [@closeSearch]="showLightbox"
+	class="containerLightBox">
+	<div #searchInput
+		*ngIf="showLightbox"
+		[@lightboxAnimation]
+		class="lightbox"
+		tabindex="0">
+		<!-- Search Input -->
+		<app-suspense-component-custom [observable]="tags$">
+			<input #filter
+				(input)="onInputChange(filter.value)"
+				type="text"
+				placeholder="Search..."
+				detail>
+			<input #filter
+				type="text"
+				placeholder="loading ..."
+				loading>
+		</app-suspense-component-custom>
+		<!-- Filtered References -->
+		<div class="references">
+			<div #tagButton
+				*ngFor="let tag of (tags$ | async); let i = index"
+				[@animeTags]="toggleTagsView[i]"
+				(click)="navigateTo(tag.id)"
+				class="ref_container">
+				<span class="queries">{{ tag.id }}</span>
+				<mat-icon fontIcon="arrow_forward"></mat-icon>
+			</div>
+		</div>
+		<!-- Close Button -->
+		<div (click)="closeLightbox()"
+			class="font_icon_close">
+			<mat-icon fontIcon="close"></mat-icon>
+		</div>
+
+		<app-suspense-component-custom [observable]="tags$">
+			<div *ngIf="toggleVisibility"
+				class="search_text" detail>
+				<h3>
+					<span>
+						Tap the search or
+						<b>ESC</b>
+						to close the pop up
+					</span>
+				</h3>
+			</div>
+			<div class="search_text placeholder" loading>
+				<div class="animated-background"></div>
+			</div>
+		</app-suspense-component-custom>
+	</div>
+</div>

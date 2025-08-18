@@ -1,0 +1,32 @@
+
+.social_block {
+  width: 40px;
+  display: flex;
+  position: fixed;
+  padding: 10px;
+  height: 90px;
+  top: 32em;
+  flex-direction: column;
+  background-color: var(--ul-background);
+  align-items: center;
+  left: 7em;
+  gap: 5px;
+  border: 1px solid #999;
+  opacity: 1;
+  z-index: 20;
+}
+
+.social_block a{
+    text-decoration: none;
+    color: none;
+    transition: opacity ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.social_block a:hover{
+    opacity: 0.5
+}
+
+.social_block a svg path{
+    fill: var(--icon-color);
+}

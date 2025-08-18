@@ -1,0 +1,44 @@
+.editor-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  .tools-panel {
+    width: 200px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+    height: 100vh;
+  }
+  
+  .editor-canvas {
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  .email_template{
+    height: 100vh;
+  }
+
+  .tools-panel .gs-utl-flex > *{
+    padding: 20px;
+  }
+
+  div[_ngcontent-ng-c42168505]{
+    background-color: blue;
+  }
+
+  .tools_panels button {
+    color: #fff;
+    font-size: 15px;
+  }
+
+  .tools_panels {
+    display: block;
+    height: 100%;
+    background-color: #000;
+  }
+
+    
+  

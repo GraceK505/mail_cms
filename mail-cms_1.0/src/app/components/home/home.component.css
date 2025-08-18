@@ -1,0 +1,52 @@
+
+.home_container {
+  width: 100%;
+  height: auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.svg_logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  position: relative;
+}
+
+.svg_logo .logo_text{
+  font-size: 70px;
+  color: var(--icon-color);
+  font-weight: bold;
+  letter-spacing: 5px;
+  /* margin-top: 30px; */
+  overflow: hidden;
+  resize: none;
+  background: none !important;
+}
+
+.logo_text{
+  display: flex;
+  transition: opacity;
+  gap: 20px;
+}
+
+.arrow_down{
+  width: auto;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+}
+
+.section_presentation{
+  width: 100%;
+  height: 100vh;
+  display: block;
+  position: relative;
+  background-color: brown;
+}

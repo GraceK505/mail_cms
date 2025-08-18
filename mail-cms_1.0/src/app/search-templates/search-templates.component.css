@@ -1,0 +1,114 @@
+.search_container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  position: relative;
+  z-index: 1;
+}
+
+.slot_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: column;
+  position: relative;
+  grid-column-start: 1;
+  grid-row-start: 2;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.btn_container {
+  display: flex;
+  position: relative;
+  width: auto;
+  height: auto;
+  gap: 20px;
+  background-color: #fff;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.card_button {
+  display: flex;
+  gap: 5px;
+  padding: 20px 10px;
+  cursor: pointer;
+}
+
+figure {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+  background-color: #fff;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+figure .image_container,
+figure .info_container {
+  width: 352px;
+  display: flex;
+  flex-direction: column;
+  height: 352px;
+  transition: opacity ease-in-out 0.5s;
+  position: absolute;
+
+}
+
+figure .image_container , figure .info_container {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+figure .info_container {
+  opacity: 0;
+}
+
+figure .info_container h1,
+figure .info_container p {
+  padding: 15px;
+}
+
+figure .image_container img {
+  opacity: 1;
+  object-fit: cover;
+}
+
+figure:hover .info_container {
+  opacity: 1;
+}
+
+figure:hover .image_container img {
+  opacity: 0.5;
+}
+
+.references {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  grid-row: 2;
+  width: 95%;
+  margin: auto;
+}
+
+.ref_container {
+  padding: 8px;
+  border: 1px solid #ee6002;
+  color: #343434;
+  font-size: 18px;
+  border-radius: 8px;
+  background-color: #eadddd;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ref_container span {
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

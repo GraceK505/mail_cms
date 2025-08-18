@@ -1,0 +1,10 @@
+.footer_container{
+    width: auto;
+    height: auto;
+    position: relative;
+    border-top: 1px solid #999;
+    background-color: var(--ul-background);
+    padding: 20px 0;
+    padding-left: 10px;
+    color: var(--icon-color);
+}
