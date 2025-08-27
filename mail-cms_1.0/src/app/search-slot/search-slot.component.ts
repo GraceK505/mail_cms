@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { SearchModalService } from '../services/search-modal.service';
+import { ModalService } from '../services/modal.service';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import {
   trigger,
@@ -90,12 +90,10 @@ export class SearchSlotComponent implements OnInit {
   constructor(
     private router: Router,
     private cdRef: ChangeDetectorRef,
-    private searchModal: SearchModalService,
+    private searchModal: ModalService,
     private store: Store,
     private converter: ConvertService
   ) {
-    
-
     this.searchModal.openModal$.subscribe((data) => {
       this.lightboxData = data;
       this.showLightbox = true;
@@ -109,11 +107,6 @@ export class SearchSlotComponent implements OnInit {
   
   ngOnInit(): void {
     this.tags$ = this.store.select(selectData)
-    // this.convertService.loadMjmlFromdb().subscribe((data: any) => {
-    //   // for (let d in data.body) {
-    //   //   this.dbData.push(data.body[d]);
-    //   // }
-    // });
   }
 
   onInputChange(value: string): void {

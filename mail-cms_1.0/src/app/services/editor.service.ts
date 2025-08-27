@@ -1,7 +1,11 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { createStudioEditor, StorageConfig } from '@grapesjs/studio-sdk';
+import { createStudioEditor } from '@grapesjs/studio-sdk';
 import { MenuService } from '../store/menu.services';
+import pluginExport from 'grapesjs-plugin-export';
+import { Editor } from 'grapesjs';
+import { BehaviorSubject } from 'rxjs';
+import { ModalService } from './modal.service';
 
 
 @Injectable({
@@ -10,11 +14,14 @@ import { MenuService } from '../store/menu.services';
 export class EditorService {
   private editor: any;
   private theme$: any = 'light';
+  private editorSubject = new BehaviorSubject<Editor | null>(null);
+  editor$ = this.editorSubject.asObservable();
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private store: MenuService
-  ) {}
+    private store: MenuService,
+    private errorModal: ModalService
+  ) { }
 
   themeChanging() {
     this.store.toggleTheme();
@@ -49,39 +56,40 @@ export class EditorService {
     if (Math.random() >= 0.7) throw new Error(str);
   }
 
-  async initializeEditor(editorEl: HTMLElement,
-    options: any, storageData?: StorageConfig): Promise<void>;
-  async initializeEditor(    editorEl: HTMLElement,
-    options: any,
-    storageData?: StorageConfig): Promise<void>;
-
   async initializeEditor(
     editorEl: HTMLElement,
-    options: any,
-    storageData?: StorageConfig
-  ): Promise<void> {
+    options?: any
+  ): Promise<Editor | undefined> {
     if (
       isPlatformBrowser(this.platformId) &&
       typeof window !== 'undefined' &&
       typeof document !== 'undefined'
     ) {
       try {
-        this.editor = createStudioEditor({
+        this.editor = await createStudioEditor({
           theme: this.theme$,
           licenseKey: '',
-          storage: storageData ?? false,
           root: editorEl,
           ...options,
+          plugins: [pluginExport,
+            (editor: Editor) => {
+              this.editorSubject.next(editor)
+            }
+          ],
         });
         console.log('Editor initialized successfully', this.editor);
+        return this.editor;
       } catch (error) {
-        console.error('Error initializing editor:', error);
+        // console.error('Error initializing editor:', error);
+        this.errorHandler(error)
+        return undefined;
       }
     }
+    return undefined;
   }
 
-  getEditorInstance(): any {
-    return this.editor;
+  errorHandler(error: any){
+    this.errorModal.erroModal(new Error(`Something broke ${error}`), 'Failed to load data');
   }
 
   destroyEditor(): void {

@@ -3,10 +3,13 @@ import {
   Output,
   EventEmitter,
   signal,
-  ChangeDetectorRef,
   PLATFORM_ID,
   Inject,
   Input,
+  OnInit,
+  ElementRef,
+  QueryList,
+  ViewChildren,
 } from '@angular/core';
 import {
   trigger,
@@ -19,13 +22,14 @@ import {
   NgFor,
   NgIf,
   AsyncPipe,
+  isPlatformBrowser,
 } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { Params, RouterOutlet, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { NavigationEnd, RouterOutlet } from '@angular/router';
+import { filter, Observable } from 'rxjs';
 import { MenuService } from '../store/menu.services';
 import { Router } from '@angular/router';
-import { SearchModalService } from '../services/search-modal.service';
+import { ModalService } from '../services/modal.service';
 import { LogoComponent } from '../components/UI/logo/logo.component';
 import { SearchSlotComponent } from '../search-slot/search-slot.component';
 import { SocialComponent } from '../components/social/social.component';
@@ -34,8 +38,11 @@ import { ConvertService } from '../services/mjml-converter.service';
 import { ViewsTypes } from '../store/menu.reducer';
 import { ShowIconOnRouteDirective } from '../directives/app-show-icon-on-route.directive';
 import { TemplateEditorService } from '../services/template-editor.service';
-import gsap from 'gsap';
+import gsap from 'gsap/all';
 import { ScrollToPlugin } from 'gsap/all';
+import { ShowIconOnRouteDirective1 } from '../directives/app-show-icon-on-route1.directive';
+import { EditorService } from '../services/editor.service';
+import { ErrorSlotComponent } from '../components/error-slot/error-slot.component';
 
 @Component({
   selector: 'app-layout',
@@ -49,7 +56,9 @@ import { ScrollToPlugin } from 'gsap/all';
     SocialComponent,
     LogoComponent,
     FooterComponent,
-    ShowIconOnRouteDirective
+    ShowIconOnRouteDirective,
+    ShowIconOnRouteDirective1,
+    ErrorSlotComponent
   ],
   styleUrls: ['./layout.component.css'],
   templateUrl: './layout.component.html',
@@ -69,35 +78,34 @@ import { ScrollToPlugin } from 'gsap/all';
   ],
 })
 
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
+  @ViewChildren("menuList") menuList!: QueryList<ElementRef>
   @Input() data_theme!: string;
   boxState: 'open' | 'closed' | 'fade' = 'closed';
   subMenuState: 'open' | 'closed' = 'closed';
   stateValue = false;
-  imageVisible = false;
   selectedItem: any = null;
   menuItems$: Observable<any>;
   currentView!: any;
-  routeChanged: any = null;
   animeState = signal<boolean>(false);
   showLightbox!: boolean;
   showSocial!: any;
   theme$: any = 'light';
   iconVisible: boolean = false;
-  handleToggleState: boolean = false;
   panelItem: any = null
+  currentUrl!: string
+  isActive: boolean = false;
 
   @Output() navigateEvent = new EventEmitter<string>();
   constructor(
-    private searchModal: SearchModalService,
+    private searchModal: ModalService,
     private store: MenuService,
     private router: Router,
     private converter: ConvertService,
     @Inject(PLATFORM_ID) private platformId: Object,
-    private editorService: TemplateEditorService
+    private editorService: TemplateEditorService,
+    private editor: EditorService
   ) {
-
-    gsap.registerPlugin(ScrollToPlugin)
     this.converter.loadMjmlFromdb()
     this.menuItems$ = this.store.getMenuItems();
 
@@ -105,17 +113,43 @@ export class LayoutComponent {
       this.currentView = view
     })
     const currentUrl = this.router.url;
-
+    this.currentUrl = this.router.url
     // ✅ Check if current URL contains 'template_editor'
     const isTemplateEditor = currentUrl.indexOf('template-editor') !== -1;
 
     this.iconVisible = isTemplateEditor
-    console.log(this.iconVisible)
-    gsap.to("#anchor", {
-      scrollTo: { y: 0 },
-      duration: 1,
-      ease: 'power2.out'
+  }
+
+  ngOnInit(): void {
+    this.scrollToSection();
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentUrl = event.urlAfterRedirects;
+        this.checkActive()
+      });
+
+  }
+
+  checkActive(): void {
+    this.menuList.forEach((ml: ElementRef) => {
+      const el = ml.nativeElement;
+      const route = el.getAttribute('data-active');
+
+      if (route === this.currentUrl) {
+        el.classList.add('active');
+      } else {
+        el.classList.remove('active');
+      }
     });
+  }
+
+  scrollToSection(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      gsap.registerPlugin(ScrollToPlugin);
+      gsap.to(window, { duration: 1, scrollTo: 0 });
+    }
   }
 
   transitionState() {
@@ -124,14 +158,21 @@ export class LayoutComponent {
     });
   }
 
+
+  flushEditor() {
+    this.editor.editor$.subscribe((ed) => {
+      ed?.runCommand("core:canvas-clear")
+    })
+  }
+
   navigationContext() {
+    this.editorService.navigateContext()
     this.boxState = 'fade';
-    return this.editorService.navigateContext()
+    return;
   }
 
   themeChanging() {
     this.store.toggleTheme();
-
     this.store.getCurrentTheme().subscribe((newTheme) => {
       this.theme$ = newTheme;
     });

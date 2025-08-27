@@ -1,8 +1,5 @@
-::view-transition-old(page-content-header) {
-  animation: 0.5s ease-in-out;
-}
-
-::view-transition-new(page-content-body) {
+::view-transition-old(social),
+::view-transition-new(social) {
   animation: 0.5s ease-in-out;
 }
 
@@ -95,14 +92,15 @@ ul {
   border-right: 1px solid #999;
 }
 
-ul li {
+ul .menu_list {
   list-style: none;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
+  position: relative;
 }
 
-ul li .button {
+ul .menu_list .button {
   color: var(--icon-color);
   text-decoration: none;
   display: flex;
@@ -235,4 +233,14 @@ ul li .button:hover {
   gap: 20px;
   align-items: flex-end;
   padding-bottom: 20px;
+}
+
+li.active::before {
+  content: "";
+  width: 3px;
+  height: 100%;
+  background-color: #222831;
+  display: inline-block;
+  position: absolute;
+  left: -20px;
 }

@@ -1,0 +1,11 @@
+<div *ngIf="isVisible" class="error_container">
+    <div class="error_box" [@lightboxAnimation]>
+        <div class="close_modal" (click)="closeModal()">
+            <mat-icon fontIcon="close"></mat-icon>
+        </div>
+		<h4>
+			<span>{{message}}</span>
+		</h4>
+        <span>{{error}}</span>
+	</div>
+</div>

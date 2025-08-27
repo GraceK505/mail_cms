@@ -19,9 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(withFetch()),
-    // provideNgxEmailBuilderConfig({
-    //   convertorPath: '/api/convert',
-    // }),
     provideRouter(routes, withComponentInputBinding(), withViewTransitions())
   ]
 };

@@ -10,7 +10,8 @@ import { delay, distinctUntilChanged } from 'rxjs/operators';
 })
 export class SuspenseComponentCustom<T> implements OnDestroy {
   private subscription!: Subscription;
-  observeState: any[] = []
+  observeState: boolean = false
+  observeHasValue: any[] = []
 
   constructor(private cdRef: ChangeDetectorRef){}
 
@@ -22,8 +23,8 @@ export class SuspenseComponentCustom<T> implements OnDestroy {
       distinctUntilChanged() // Avoid duplicate emissions
     ).subscribe({
       next: (data) => {
-        this.observeState = Array.isArray(data) ? [...data] : [];
-
+        this.observeHasValue = Array.isArray(data) ? [...data] : [];
+        this.observeState = this.observeHasValue.length > 0 || true
         console.log(data)
         this.cdRef.detectChanges();
       },

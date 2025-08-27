@@ -1,3 +1,14 @@
+.main_container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    position: relative;
+    z-index: 1;
+    justify-content: flex-start;
+    grid-template-columns: 0.1fr 1fr 0.1fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
+}
+
 .view_container {
     width: 100%;
     height: 100%;
@@ -6,8 +17,9 @@
     z-index: 1;
     justify-content: flex-start;
     grid-template-columns: 0.1fr 0.5fr 0.5fr 0.1fr;
-    grid-template-rows: 0.1fr 1fr 0.5fr 0.1fr;
+    grid-template-rows: 0.1fr 1fr 0.2fr 0.1fr;
     column-gap: 2%;
+    row-gap: 3%;
 }
 
 .email-input {
@@ -90,13 +102,38 @@ iframe {
     display: inline-block !important;
 }
 
-.submit{
+.submit {
     grid-column-start: 2;
     grid-row-start: 3;
     border: 1px solid #ee6002;
     border-radius: 15px;
     padding: 10px;
-    height: 20px;
+    height: 100%;
     width: 130px;
     cursor: pointer;
+}
+
+.success_message {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 20;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    background-color: #fff2df;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #343434;
+}
+
+.closebtn {
+    position: relative;
+    display: inline-block;
+    background-color: #999;
 }

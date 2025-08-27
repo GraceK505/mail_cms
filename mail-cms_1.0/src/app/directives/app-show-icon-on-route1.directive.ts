@@ -3,10 +3,10 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Directive({
-  selector: '[appShowIconOnRoute]'
+  selector: '[appShowIconOnRoute1]'
 })
-export class ShowIconOnRouteDirective implements OnInit {
-  @Input('appShowIconOnRoute') matchPath!: string;
+export class ShowIconOnRouteDirective1 implements OnInit {
+  @Input('appShowIconOnRoute1') matchPath!: string;
 
   constructor(
     private el: ElementRef,

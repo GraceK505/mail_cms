@@ -12,18 +12,16 @@ import { selectData } from '../../store/tags.selectors';
 import { Store } from '@ngrx/store';
 import { SuspenseComponentCustom } from '../suspense/suspense.component';
 import { EditorElementComponent } from '../editorElement/editorElement.component';
-import { GenericButtonComponent } from "../generic-button/generic-button.component";
 
 @Component({
   selector: 'app-template-editing',
-  imports: [SuspenseComponentCustom, EditorElementComponent, GenericButtonComponent],
+  imports: [SuspenseComponentCustom, EditorElementComponent],
   templateUrl: './template-editing.component.html',
   styleUrls: ['./template-editing.component.css'],
 })
 export class TemplateEditingComponent implements AfterViewInit {
   data$!: Observable<SearchTagsType[]>;
   currentTemplateID: string = ""
-
 
   constructor(
     private convertService: ConvertService,

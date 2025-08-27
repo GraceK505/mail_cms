@@ -1,14 +1,69 @@
 <div class="home_container">
-  <div class="svg_logo" id="content">
-    <app-svg-animation [transitionValue]="currentURL"></app-svg-animation>
-    <div class="logo_text">
-      <span #splittedText>Mail CMS Editor</span>
-    </div>
-    <div class="arrow_down" (click)="scrollToSection()">
-      <app-arrow></app-arrow>
-    </div>
-  </div>
-  <div class="section_presentation">
-
-  </div>
+	<div class="svg_logo"
+		id="content">
+		<div class="paperplane">
+			<div class="plane">
+				<div class="wingRight"></div>
+				<div class="wingLeft"></div>
+				<div class="bottom"></div>
+				<div class="top"></div>
+				<div class="middle"></div>
+			</div>
+			<div class="clouds">
+				<div class="cloudOne"></div>
+				<div class="cloudTwo"></div>
+				<div class="cloudThree"></div>
+			</div>
+		</div>
+		<div class="logo_text">
+			<span #splittedText>Mail CMS Editor</span>
+		</div>
+		<div (click)="scrollToSection()"
+			class="arrow_down">
+			<app-arrow></app-arrow>
+		</div>
+	</div>
+	<div #section1 class="st section_presentation">
+		<div class="wrapper">
+			<div class="lid one"></div>
+			<div class="lid two"></div>
+			<div class="envelope"></div>
+			<div class="letter">
+				<p>Hello</p>
+			</div>
+		</div>
+		<h1 class="section_title t1">Inbox Intelligence</h1>
+		<span>Smart sorting</span>
+		<span>filtering</span>
+		<span>and search</span>
+		<h1 class="elem">
+			Templates
+		</h1>
+	</div>
+	<div #section2 class="st section_presentation_1">
+		<div class="draw-container">
+			<div class="draw">
+				<!-- Rocket -->
+				<div class="rocket">
+					<div class="window"></div>
+				</div>
+			</div>
+		</div>
+		<h1 class="section_title t2">Send & Soar</h1>
+		<span>
+			Compose and dispatch emails with flair
+		</span>
+		<h1 class="elem">Free compose</h1>
+	</div>
+	<div #section3 class="st section_presentation">
+		<div class="chart">
+			<div class="bar bar1"></div>
+			<div class="bar bar2"></div>
+			<div class="bar bar3"></div>
+		</div>
+		<h1 class="section_title t3">Mail Metrics</h1>
+		<span>
+			Analytics and delivery reports
+		</span>
+	</div>
 </div>

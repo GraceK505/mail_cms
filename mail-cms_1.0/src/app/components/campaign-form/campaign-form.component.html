@@ -1,21 +1,35 @@
 <div class="view_container">
-  <div class="form_container_grid">
-    <input placeholder="from:" #adminName type="text" name="name"/>
-    <div class="email-container">
-      <div
-        #editable
-        class="email-input"
-        contenteditable="true"
-        (input)="handleInput($event)"
-      ></div>
-    </div>
-    <input placeholder="Subject:" #subject type="text" name="Subject"/>
-    <div #parentElmnt class="htmlEditor"></div>
-  </div>
-  <div class="description">
-    <iframe [frameBorder]="0" #iframeElement></iframe>
-  </div>
-  <!-- <div class="submit" (click)="submit()">
-    submit your email
-  </div> -->
+	<div class="form_container_grid">
+		<input #adminName
+			placeholder="from:"
+			type="text"
+			name="name">
+		<div class="email-container">
+			<div #editable
+				(input)="handleInput($event)"
+				class="email-input"
+				contenteditable="true"></div>
+		</div>
+		<input #subject
+			placeholder="Subject:"
+			type="text"
+			name="Subject">
+		<!-- <input placeholder="upload Zip:" #fileUploads type="file" name="file"/> -->
+		<div #parentElmnt
+			class="htmlEditor"></div>
+	</div>
+	<div class="description">
+		<iframe #iframeElement
+			[frameBorder]="0"></iframe>
+	</div>
+	<button #submitButton
+		(click)="submit($event)"
+		class="submit">
+	</button>
+	<div *ngIf="!(this.emailService.loading | async)"
+		[@end_animation]
+		(@end_animation.done)="headingAnimation()"
+		class="success_message">
+		<h1 [@heading]="readyState">THANK YOU!</h1>
+	</div>
 </div>

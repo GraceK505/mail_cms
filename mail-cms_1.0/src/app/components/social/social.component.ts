@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { SearchModalService } from '../../services/search-modal.service';
+import { ModalService } from '../../services/modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   trigger,
@@ -40,7 +40,7 @@ export class SocialComponent {
   constructor(
     private router: Router,
     private cdRef: ChangeDetectorRef,
-    private searchModal: SearchModalService
+    private searchModal: ModalService
   ) {
   }
 

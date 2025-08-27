@@ -118,32 +118,8 @@ export const initialState: MenuItem[] = [
       },
     ],
   },
-  {
-    id: 4,
-    name: 'Campaigns',
-    field: 'campaign',
-    expanded: false,
-    subMenu: [
-      {
-        name: 'campaign',
-        editorPanel: true,
-        panelIcons: [
-          {
-            iconText: 'Clear Canvas',
-            icon: 'clear',
-            commandName: 'core:canvas-clear',
-          },
-          {
-            iconText: 'Delete',
-            icon: 'close',
-            commandName: 'core:component-delete',
-          },
-        ],
-      },
-    ],
-  },
     {
-    id: 5,
+    id: 4,
     name: 'Template',
     field: 'dataset',
     expanded: false,
@@ -167,7 +143,7 @@ export const initialState: MenuItem[] = [
     ],
   },
   {
-    id: 6,
+    id: 5,
     name: 'Theme',
     field: 'dark_mode',
     expanded: false,
@@ -191,7 +167,7 @@ export const initialState: MenuItem[] = [
     ],
   },
   {
-    id: 7,
+    id: 6,
     name: 'Social',
     field: 'tag',
     expanded: false,
@@ -215,7 +191,7 @@ export const initialState: MenuItem[] = [
     ],
   },
     {
-    id: 8,
+    id: 7,
     name: 'More',
     field: 'settings',
     expanded: false,
@@ -237,7 +213,31 @@ export const initialState: MenuItem[] = [
         ],
       },
     ],
-  }
+  },
+    {
+    id: 8,
+    name: 'Start',
+    field: 'start',
+    expanded: false,
+    subMenu: [
+      {
+        name: 'start',
+        editorPanel: true,
+        panelIcons: [
+          {
+            iconText: 'Clear Canvas',
+            icon: 'clear',
+            commandName: 'core:canvas-clear',
+          },
+          {
+            iconText: 'Delete',
+            icon: 'close',
+            commandName: 'core:component-delete',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const initialViewState: { currentView: ViewsTypes } = {

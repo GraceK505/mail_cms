@@ -6,7 +6,7 @@ import { EditorView, basicSetup } from "codemirror"
 
 @Component({
   selector: 'app-campaign',
-  imports: [CampaignFormComponent, AsyncPipe],
+  imports: [CampaignFormComponent],
   templateUrl: './campaign.component.html',
   styleUrl: './campaign.component.css'
 })

@@ -19,7 +19,7 @@ import {
   style,
   transition,
 } from '@angular/animations';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { SuspenseComponentCustom } from '../components/suspense/suspense.component';
 import { selectData, selectLoading } from '../store/tags.selectors';
@@ -52,7 +52,7 @@ type HideAndShow = 'show' | 'hide';
   ],
 })
 export class TemplateListComponent implements OnInit {
-  @ViewChildren('email_cards') emailCards!: QueryList<
+  @ViewChildren('email_cards') email_cards!: QueryList<
     ElementRef<HTMLDivElement>
   >;
   @ViewChild('inputText', { static: false })
@@ -60,7 +60,7 @@ export class TemplateListComponent implements OnInit {
 
   tags$!: Observable<SearchTagsType[]>;
   toggleSearch!: any;
-  toggleVisibility: HideAndShow = 'show';
+  toggleVisibility!: boolean;
   hoverState: { [key: string]: string } = {};
   textDefileState: { [key: string]: string } = {};
   checkTheLength: WritableSignal<boolean> = signal(false);
@@ -69,7 +69,7 @@ export class TemplateListComponent implements OnInit {
   search$ = new BehaviorSubject<string>('');
   public store: Store = inject(Store)
 
-  constructor(private router: Router, private converter: ConvertService) {} 
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.tags$ = this.store.select(selectData),
@@ -77,12 +77,41 @@ export class TemplateListComponent implements OnInit {
   }
 
   onInputSearch(value: string): void {
-    this.search$.next(value)
+    const searchValue = value.toLowerCase().trim();
+
+    this.tags$.subscribe((tags: Array<{ name: string }>) => {
+      const matchingTags = tags.filter(tag =>
+        tag.name.toLowerCase().includes(searchValue)
+      );
+
+      const hasMatch = matchingTags.length > 0;
+
+      if (!this.email_cards || this.email_cards.length === 0) {
+        console.warn("Email card elements not found.");
+        return;
+      }
+
+      const cardsArray = this.email_cards.toArray();
+
+      cardsArray.forEach((card, index) => {
+        const tag = tags[index];
+
+        const shouldShow =
+          value.length === 0 || // Show all if input is cleared
+          (hasMatch &&
+            matchingTags.some(matchingTag => matchingTag.name === tag.name));
+
+        card.nativeElement.style.display = shouldShow ? "inline" : "none";
+      });
+
+      // Optional: update toggleVisibility based on whether anything is shown
+      this.toggleVisibility = value.length === 0 || hasMatch;
+    });
   }
 
   navigateTo(viewId: string): void {
     if (!viewId) return;
-    localStorage.clear()
+    sessionStorage.clear()
     this.router.navigate(['/template-editor'], { queryParams: { id: viewId } });
   }
 
