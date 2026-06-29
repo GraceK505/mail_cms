@@ -8,8 +8,7 @@ import {
   ViewChild,
 } from "@angular/core";
 import "@grapesjs/studio-sdk/dist/style.css";
-import { firstValueFrom, Observable } from "rxjs";
-// import { templates } from "../data/data";
+import { Observable } from "rxjs";
 import { EditorService } from "../../services/editor.service";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -17,8 +16,6 @@ import { Router } from "@angular/router";
 import { ConvertService } from "../../services/mjml-converter.service";
 import { selectData } from "../../store/tags.selectors";
 import { SearchTagsType } from "../../models/template";
-import pluginExport from "grapesjs-plugin-export";
-import { Editor } from "grapesjs";
 
 @Component({
   selector: "app-editor",

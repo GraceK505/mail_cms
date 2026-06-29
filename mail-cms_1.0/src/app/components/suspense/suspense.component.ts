@@ -25,7 +25,7 @@ export class SuspenseComponentCustom<T> implements OnDestroy {
       next: (data) => {
         this.observeHasValue = Array.isArray(data) ? [...data] : [];
         this.observeState = this.observeHasValue.length > 0 || true
-        console.log(data)
+        // console.log(data)
         this.cdRef.detectChanges();
       },
       error: (err) => console.error(err),

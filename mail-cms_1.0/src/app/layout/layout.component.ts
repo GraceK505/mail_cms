@@ -95,6 +95,7 @@ export class LayoutComponent implements OnInit {
   panelItem: any = null
   currentUrl!: string
   isActive: boolean = false;
+  isBrowser: boolean = false;
 
   @Output() navigateEvent = new EventEmitter<string>();
   constructor(
@@ -121,6 +122,8 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId)
+
     this.scrollToSection();
 
     this.router.events
@@ -146,7 +149,7 @@ export class LayoutComponent implements OnInit {
   }
 
   scrollToSection(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       gsap.registerPlugin(ScrollToPlugin);
       gsap.to(window, { duration: 1, scrollTo: 0 });
     }

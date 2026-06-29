@@ -9,6 +9,7 @@ const client = new MongoClient(
   `mongodb+srv://CleverGrace:%23.J87tasTptRJaw@emailtemplatecluster.7wg7scv.mongodb.net/?retryWrites=true&w=majority&appName=emailTemplateCluster`
 );
 
+
 router.post("/convert-mjml", async (req, res) => {
   const { mjml: mjmlString } = req.body;
 
@@ -27,6 +28,8 @@ router.post("/convert-mjml", async (req, res) => {
 
 router.get("/emails", async (req, res) => {
   try {
+    console.log("MongoDB URI:", uri + "\n" + "Server Port:", port);
+
     await client.connect();
     db = await client.db("CleverGraceDB");
     const emails = await db.collection("CleverGraceDB").find().toArray();

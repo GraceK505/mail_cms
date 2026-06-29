@@ -18,14 +18,18 @@ export class HomeComponent implements OnInit {
   @ViewChild('section2', { static: true }) section2!: ElementRef;
   @ViewChild('section3', { static: true }) section3!: ElementRef;
 
-  currentURL: string = ""
+  currentURL: string = "";
+  isBrowser: boolean = false;
+
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
     gsap.registerPlugin(SplitText, ScrollToPlugin, ScrollTrigger)
+
+    this.isBrowser = isPlatformBrowser(this.platformId)
   }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
+    if (this.isBrowser) {
       let split = SplitText.create('.logo_text span', { type: 'words, chars' });
 
       gsap.fromTo(

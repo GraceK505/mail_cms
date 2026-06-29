@@ -102,7 +102,7 @@ export class TemplateEditorService implements OnInit {
     ) {
       try {
         this.studio = await createStudioEditor({
-          licenseKey: '',
+          licenseKey: '5d0d2a959abd492cbdccc8f94a476f79e00fef90ea7940fe838d3ea5221926d6',
           root: editorEl,
           assets: {
             storageType: "self",

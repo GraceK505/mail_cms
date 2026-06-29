@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Input, PLATFORM_ID, ViewChild } from '@angular/core';
 import { EditorView, keymap } from '@codemirror/view';
 import { EditorState } from '@codemirror/state';
 import { basicSetup } from 'codemirror';
@@ -7,7 +7,7 @@ import { indentOnInput } from '@codemirror/language';
 import { indentMore, indentLess } from '@codemirror/commands';
 import { EmailService } from '../../services/send-email.service';
 import { Router } from '@angular/router';
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe, isPlatformBrowser, NgIf } from "@angular/common";
 import { trigger, state, animate, style, transition } from '@angular/animations';
 
 @Component({
@@ -48,9 +48,13 @@ export class CampaignFormComponent {
 
   emailView!: any;
 
-  constructor(public emailService: EmailService, private router: Router, private cdRef: ChangeDetectorRef) { }
+  constructor(public emailService: EmailService, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   async ngAfterViewInit() {
+    const isBrowser = isPlatformBrowser(this.platformId)
+    
+    if (!isBrowser) return
+
     let doc = this.iframeElement.nativeElement.contentDocument || this.iframeElement.nativeElement.contentWindow?.document;
     doc?.open();
     doc?.write(this.emailTemplate);
